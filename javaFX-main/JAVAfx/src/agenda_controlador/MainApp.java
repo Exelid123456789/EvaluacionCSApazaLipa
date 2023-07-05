@@ -162,6 +162,10 @@ public void initRootLayout() {
     public static void main(String[] args) {
         launch(args);
     }
+
+    Object getPersonData() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
 
 
