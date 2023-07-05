@@ -84,6 +84,7 @@ public void initRootLayout() {
     
     public boolean showPersonEditDialog(Person person) {
     try {
+        //PersonJpaController  ContactoJPa= new PersonJpaController();
         // Load the fxml file and create a new stage for the popup dialog.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("/agenda_vista/PersonEditDialog.fxml"));
@@ -100,7 +101,7 @@ public void initRootLayout() {
         // Set the person into the controller.
         PersonEditDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
-        controller.setPerson(person);
+        //controller.setPerson(person);
 
         // Set the dialog icon.
         dialogStage.getIcons().add(new Image("/agenda_vista/agenda.png"));

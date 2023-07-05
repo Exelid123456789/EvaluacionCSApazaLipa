@@ -86,8 +86,8 @@ public class PersonOverviewController {
         Person tempPerson = new Person();
         boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
         if (okClicked) {
-            //mainApp.showPersonEditDialog(tempPerson);
-            mainApp.getPersonData().equals(this);
+            mainApp.showPersonEditDialog(tempPerson);
+            //mainApp.getPersonData();
         }
     }
 

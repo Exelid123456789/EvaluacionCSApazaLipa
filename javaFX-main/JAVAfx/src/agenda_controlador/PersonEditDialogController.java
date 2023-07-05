@@ -93,7 +93,7 @@ public class PersonEditDialogController {
             person.setPostalCode(Integer.parseInt(postalCodeField.getText()));
             person.setCity(cityField.getText());
             //person.setBirthday(DateUtil.parse(birthdayField.getText()));
-
+            ContactoJPa.create(person);
             okClicked = true;
             dialogStage.close();
         }
