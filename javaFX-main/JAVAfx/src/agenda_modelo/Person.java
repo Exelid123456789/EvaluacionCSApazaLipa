@@ -1,6 +1,9 @@
 
 package agenda_modelo;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Objects;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -8,112 +11,134 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
-public class Person {
+@Entity
+public class Person implements Serializable {
         
-        private final StringProperty firstName;
-	private final StringProperty lastName;
-	private final StringProperty street;
-	private final IntegerProperty postalCode;
-	private final StringProperty city;
-	private final ObjectProperty<LocalDate> birthday;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Basic(optional = false)
+        @Column(name = "contacto_id", nullable = false)
+	private  Integer postalCode;
+        @Column(length = 20)
+        private  String firstName;
+        @Column(length = 20)
+	private  String lastName;
+        @Column(length = 20)
+	private  String street;
+        @Column(length = 20)
+	private  String city;
+        @Temporal(TemporalType.TIMESTAMP)
+	private  Date birthday;
 
 	/**
 	 * Default constructor.
 	 */
+        
 	public Person() {
-		this(null, null);
+            this(null,null,null,null,null,null);
 	}
-	
-	/**
-	 * Constructor with some initial data.
-	 * 
-	 * @param firstName
-	 * @param lastName
-	 */
-	public Person(String firstName, String lastName) {
-		this.firstName = new SimpleStringProperty(firstName);
-		this.lastName = new SimpleStringProperty(lastName);
-		
-		// Some initial dummy data, just for convenient testing.
-		this.street = new SimpleStringProperty("some street");
-		this.postalCode = new SimpleIntegerProperty(1234);
-		this.city = new SimpleStringProperty("some city");
-		this.birthday = new SimpleObjectProperty<>(LocalDate.of(1999, 2, 21));
-	}
-	
-	public String getFirstName() {
-        return firstName.get();
+
+    public Person(Integer postalCode, String firstName, String lastName, String street, String city, Date birthday) {
+        this.postalCode = postalCode;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.birthday = birthday;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName.set(firstName);
+    public Integer getPostalCode() {
+        return postalCode;
     }
 
-    public StringProperty firstNameProperty() {
+    public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
-        return lastName.get();
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName.set(lastName);
-    }
-
-    public StringProperty lastNameProperty() {
         return lastName;
     }
 
     public String getStreet() {
-        return street.get();
-    }
-
-    public void setStreet(String street) {
-        this.street.set(street);
-    }
-
-    public StringProperty streetProperty() {
         return street;
     }
 
-    public int getPostalCode() {
-        return postalCode.get();
-    }
-
-    public void setPostalCode(int postalCode) {
-        this.postalCode.set(postalCode);
-    }
-
-    public IntegerProperty postalCodeProperty() {
-        return postalCode;
-    }
-
     public String getCity() {
-        return city.get();
-    }
-
-    public void setCity(String city) {
-        this.city.set(city);
-    }
-
-    public StringProperty cityProperty() {
         return city;
     }
 
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    public LocalDate getBirthday() {
-        return birthday.get();
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday.set(birthday);
-    }
-
-    public ObjectProperty<LocalDate> birthdayProperty() {
+    public Date getBirthday() {
         return birthday;
     }
+
+    public void setPostalCode(Integer postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.postalCode);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person other = (Person) obj;
+        return Objects.equals(this.postalCode, other.postalCode);
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" + "postalCode=" + postalCode + '}';
+    }
+
+    
+    /**
+     * Constructor with some initial data.
+     *
+     * @param firstName
+     * @param lastName
+     */
+        
+        
 }

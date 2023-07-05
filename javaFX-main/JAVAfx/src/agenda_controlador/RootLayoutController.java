@@ -30,7 +30,7 @@ public class RootLayoutController {
      */
     @FXML
     private void handleNew() {
-        mainApp.getPersonData().clear();
+        //mainApp.getPersonData().clear();
         mainApp.setPersonFilePath(null);
     }
 
@@ -49,7 +49,7 @@ public class RootLayoutController {
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
-            mainApp.loadPersonDataFromFile(file);
+            //mainApp.loadPersonDataFromFile(file);
         }
     }
 
@@ -61,7 +61,7 @@ public class RootLayoutController {
     private void handleSave() {
         File personFile = mainApp.getPersonFilePath();
         if (personFile != null) {
-            mainApp.savePersonDataToFile(personFile);
+            //mainApp.savePersonDataToFile(personFile);
         } else {
             handleSaveAs();
         }
@@ -86,7 +86,7 @@ public class RootLayoutController {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            mainApp.savePersonDataToFile(file);
+            //mainApp.savePersonDataToFile(file);
         }
     }
 

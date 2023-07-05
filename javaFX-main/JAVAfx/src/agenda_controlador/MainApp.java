@@ -28,23 +28,6 @@ public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private ObservableList<Person> personData = FXCollections.observableArrayList();
-    public MainApp() {
-// agregación de datos de prueva
-        personData.add(new Person("Hans", "Muster"));
-	personData.add(new Person("Ruth", "Mueller"));
-	personData.add(new Person("Heinz", "Kurz"));
-	personData.add(new Person("Cornelia", "Meier"));
-	personData.add(new Person("Werner", "Meyer"));
-	personData.add(new Person("Lydia", "Kunz"));
-	personData.add(new Person("Anna", "Best"));
-	personData.add(new Person("Stefan", "Meier"));
-	personData.add(new Person("Martin", "Mueller"));
-    }
-    
-    public ObservableList<Person> getPersonData() {
-        return personData;
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -78,11 +61,6 @@ public void initRootLayout() {
     } catch (IOException e) {
         e.printStackTrace();
     }
-    // Try to load last opened person file.
-        File file = getPersonFilePath();
-        if (file != null) {
-            loadPersonDataFromFile(file);
-        }
 }
 
     public void showPersonOverview() {//ppara que el programa se inicie tiene que pasar primero por este método
@@ -175,71 +153,7 @@ public void initRootLayout() {
             primaryStage.setTitle("JAVAfx");
         }
     }
-    
-    /**
-     * Loads person data from the specified file. The current person data will
-     * be replaced.
-     * 
-     * @param file
-     */
-    public void loadPersonDataFromFile(File file) {
-        try {
-            JAXBContext context = JAXBContext
-                    .newInstance(PersonListWrapper.class);
-            Unmarshaller um = context.createUnmarshaller();
 
-            // Reading XML from the file and unmarshalling.
-            PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
-
-            personData.clear();
-            personData.addAll(wrapper.getPersons());
-
-            // Save the file path to the registry.
-            setPersonFilePath(file);
-
-        } catch (Exception e) { // catches ANY exception
-        	Alert alert = new Alert(AlertType.ERROR);
-        	alert.setTitle("Error");
-        	alert.setHeaderText("Could not load data");
-        	alert.setContentText("Could not load data from file:\n" + file.getPath());
-        	
-        	alert.showAndWait();
-        }
-    }
-    
-    /**
-     * Saves the current person data to the specified file.
-     * 
-     * @param file
-     */
-    public void savePersonDataToFile(File file) {
-        try {
-            JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            // Wrapping our person data.
-            PersonListWrapper wrapper = new PersonListWrapper();
-            wrapper.setPersons(personData);
-
-            // Marshalling and saving XML to the file.
-            m.marshal(wrapper, file);
-
-            // Save the file path to the registry.
-            setPersonFilePath(file);
-        } catch (Exception e) { // catches ANY exception
-        	Alert alert = new Alert(AlertType.ERROR);
-        	alert.setTitle("Error");
-        	alert.setHeaderText("Could not save data");
-        	alert.setContentText("Could not save data to file:\n" + file.getPath());
-        	
-        	alert.showAndWait();
-        }
-    }
-
-    
-    
-    
     public Stage getPrimaryStage() {
 		return primaryStage;
 	}

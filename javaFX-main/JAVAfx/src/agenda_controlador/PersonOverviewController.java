@@ -51,8 +51,8 @@ public class PersonOverviewController {
     @FXML
     private void initialize() {
     	// Initialize the person table with the two columns.
-        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        //firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        //lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         
         showPersonDetails(null);//borramos los detalles de una persona.
         
@@ -85,7 +85,7 @@ public class PersonOverviewController {
         Person tempPerson = new Person();
         boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
         if (okClicked) {
-            mainApp.getPersonData().add(tempPerson);
+            //mainApp.getPersonData().add(tempPerson);
         }
     }
 
@@ -122,7 +122,7 @@ public class PersonOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        personTable.setItems(mainApp.getPersonData());
+        //personTable.setItems(mainApp.getPersonData());
     }
 
     void setPersonData(ObservableList<Person> personData) {
@@ -139,7 +139,7 @@ public class PersonOverviewController {
         postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
         cityLabel.setText(person.getCity());
         // TODO: We need a way to convert the birthday into a String!
-        birthdayLabel.setText(DateUtil.format(person.getBirthday())); 
+        //birthdayLabel.setText(DateUtil.format(person.getBirthday())); 
         // birthdayLabel.setText(...);
     } else {
         // Person is null, remove all the text.
