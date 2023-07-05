@@ -85,6 +85,7 @@ public class PersonEditDialogController {
      */
     @FXML
     private void handleOk() {//se tiene que colocar el nombre de el método en el apartado de code (On Action) para cuando se presiona el boton de OK
+                PersonJpaController  ContactoJPa= new PersonJpaController();
         if (isInputValid()) {
             person.setFirstName(firstNameField.getText());
             person.setLastName(lastNameField.getText());
